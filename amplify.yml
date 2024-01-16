@@ -1,18 +1,14 @@
 version: 1
-frontend:
-  phases:
-    # Pas de phase de build frontend nécessaire pour une API backend.
 backend:
   phases:
     build:
       commands:
         - npm install # Installation des dépendances Node.js
-        - npm start   # Commande pour démarrer votre application backend, définie dans votre package.json
-  artifacts:
-    # Même si aucun artefact n'est généré pour une API, cette clé doit être présente.
-    baseDirectory: /
-    files:
-      - '**/*'
-  cache:
-    paths:
-      - node_modules/**/*
+        - npm run start # ou une autre commande pour démarrer votre serveur
+artifacts:
+  baseDirectory: /
+  files:
+    - '**/*'
+cache:
+  paths:
+    - node_modules/**/*
