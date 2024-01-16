@@ -1,16 +1,18 @@
 version: 1
-frontend:
-  artifacts: # Définition vide des artefacts frontend car ils ne sont pas nécessaires pour une API backend
 backend:
   phases:
     build:
       commands:
-        - npm install # Installation des dépendances Node.js
-        - npm run start # Remplacez par la commande nécessaire pour démarrer votre serveur
+        - npm install
+        - npm run start
   artifacts:
-    baseDirectory: / # ou le chemin vers le répertoire contenant votre code de production si différent
+    baseDirectory: /
     files:
       - '**/*'
+frontend:
+  artifacts:
+    baseDirectory: / # Doit pointer vers un dossier existant, même s'il est vide.
+    files: [] # Spécifiez un tableau vide pour indiquer qu'aucun fichier n'est produit pour le frontend.
 cache:
   paths:
     - node_modules/**/*
