@@ -1,4 +1,7 @@
 version: 1
+frontend:
+  phases:
+    # Pas de phase de build frontend nécessaire pour une API backend.
 backend:
   phases:
     build:
