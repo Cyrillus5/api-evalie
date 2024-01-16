@@ -4,7 +4,7 @@ backend:
     build:
       commands:
         - npm install
-        - npm run start
+        - node index.js
   artifacts:
     baseDirectory: /
     files:
