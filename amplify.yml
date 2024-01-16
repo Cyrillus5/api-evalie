@@ -6,13 +6,13 @@ backend:
   phases:
     build:
       commands:
-        - npm install  # Installation des dépendances Node.js
-        - npm start    # Commande pour démarrer votre application backend, qui doit être définie dans votre package.json
-  # Pas d'artifacts nécessaire pour une API
-  # artifacts:
-  #   baseDirectory: /
-  #   files:
-  #     - '**/*'
+        - npm install # Installation des dépendances Node.js
+        - npm start   # Commande pour démarrer votre application backend, définie dans votre package.json
+  artifacts:
+    # Même si aucun artefact n'est généré pour une API, cette clé doit être présente.
+    baseDirectory: /
+    files:
+      - '**/*'
   cache:
     paths:
       - node_modules/**/*
