@@ -11,13 +11,9 @@ const getEligibility = async (req, res) => {
         const { codeCollectivity, codeCollectivityDepartment, codeCollectivityRegion, selectedItem, typeHouseLowerCase } = req.query;
 
         // Get all works list
-        const response = await axios.get("https://data.ademe.fr/data-fair/api/v1/datasets/simul'aideuros-dispositifs-travaux/lines?size=6000&select=id_dispositif%2Cintitule_dispositif%2Ccode_travaux%2Ccategorie%2Cintitule%2Cmaison%2Cappartement%2Coutre_mer%2Celigibilite_specifique%2Ctype%2Ccondition_regle%2Cexpression");
-
-        const typeHouseEligibility = response.data.results.filter(dispositif => 
-            typeHouseLowerCase === 'appartement' ? dispositif.appartement === true : dispositif.maison === true
-        );
+        const response = await axios.get(`https://data.ademe.fr/data-fair/api/v1/datasets/simul'aideuros-dispositifs-travaux/lines?size=6000&select=id_dispositif%2Cintitule%2C${typeHouseLowerCase}%2Coutre_mer`);
         
-        const workSelected = typeHouseEligibility.filter(work => work.intitule === selectedItem)
+        const workSelected = response.data.results.filter(work => work.intitule === selectedItem);
 
         const listEligibleDispositifsWithWorkSelected = workSelected.map(dispositif => dispositif.id_dispositif );
 
