@@ -89,7 +89,7 @@ const swaggerOptions = {
       "/eligible-systems": {
         get: {
           summary: "Obtenir la liste des dispositifs éligibles pour des travaux spécifiques",
-          description: "Récupère la liste des dispositifs éligibles pour des travaux spécifiques en fonction de différents critères.",
+          description: "Récupère la liste des dispositifs éligibles pour des travaux spécifiques en fonction de différents critères. Exemple de requête : `https://api.evalie.fr/eligible-systems?codeCollectivity=28085&codeCollectivityDepartment=28&codeCollectivityRegion=24&selectedItem=Audit+%C3%A9nerg%C3%A9tique&typeHouseLowerCase=maison`",
           parameters: [
             {
               in: "query",
