@@ -2,14 +2,29 @@
 // API ADEME
 
 import axios from 'axios';
+import Joi from 'joi';
 
 import getEligibleDispositifs from '../services/getEligibleDispositifs.js';
 import getDispositifsDescription from '../services/getDispositifsDescription.js';
 
 const getEligibility = async (req, res) => {
     try{
-        const { codeCollectivity, codeCollectivityDepartment, codeCollectivityRegion, selectedItem, typeHouseLowerCase } = req.query;
+        const schema = Joi.object({
+            codeCollectivity: Joi.string().required(),
+            codeCollectivityDepartment: Joi.string().required(),
+            codeCollectivityRegion: Joi.string().required(),
+            selectedItem: Joi.string().required(),
+            typeHouseLowerCase: Joi.string().required(),
+        });
+        
+        // Validate datas
+        const { error, value } = schema.validate(req.query);
+        if (error) {
+            return res.status(400).json({ message: error.details[0].message });
+        };
 
+        const { codeCollectivity, codeCollectivityDepartment, codeCollectivityRegion, selectedItem, typeHouseLowerCase } = value;
+        
         // Get all works list
         const response = await axios.get(`https://data.ademe.fr/data-fair/api/v1/datasets/simul'aideuros-dispositifs-travaux/lines?size=6000&select=id_dispositif%2Cintitule%2C${typeHouseLowerCase}%2Coutre_mer`);
         
