@@ -25,15 +25,19 @@ const getEligibility = async (req, res) => {
 
         const { codeCollectivity, codeCollectivityDepartment, codeCollectivityRegion, selectedItem, typeHouseLowerCase } = value;
         
-        // Get all works list
+        // Get all eligible financial assistance list according to type House
         const response = await axios.get(`https://data.ademe.fr/data-fair/api/v1/datasets/simul'aideuros-dispositifs-travaux/lines?size=6000&select=id_dispositif%2Cintitule%2C${typeHouseLowerCase}%2Coutre_mer`);
         
+        // Get all eligible financial assistance list according to works selected
         const workSelected = response.data.results.filter(work => work.intitule === selectedItem);
 
+        // Keep ID of eligible financial assistance list according to works selected
         const listEligibleDispositifsWithWorkSelected = workSelected.map(dispositif => dispositif.id_dispositif );
 
+        // Get eligible financial assistance according to zip code
         const selectedResults = await getEligibleDispositifs(listEligibleDispositifsWithWorkSelected, codeCollectivity, codeCollectivityDepartment, codeCollectivityRegion);
 
+        // Get all eligible financial assistance according to zip code with description
         const dispositifs = await getDispositifsDescription(selectedResults);
        
         if(dispositifs){

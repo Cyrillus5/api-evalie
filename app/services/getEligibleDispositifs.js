@@ -1,3 +1,4 @@
+// Get eligible financial assistance according to zip code
 import axios from 'axios';
 
 const fetchAllData = async (baseUrl, queryParams) => {
